@@ -12,9 +12,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, } from "react-router-dom";
+import logo1 from "../assets/Logo/HealTogether-removebg-preview.png"
+import logo2 from "../assets/Logo/HealTogether__1_-removebg-preview.png"
 
-const settings = ["dashboard", "logout"];
 
 function Navber() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -31,24 +32,28 @@ function Navber() {
     setAnchorElNav(null);
     console.log(page);
   };
-const navigate = useNavigate()
-  const handleCloseUserMenu = (setting) => {
+
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
     
-    navigate(`/${setting}`)
   };
 
+  const handleLogout = ()=> {
+
+  }
+
   return (
-    <AppBar sx={{backgroundColor: 'olivedrab'}}>
+    <AppBar sx={{backgroundColor: "rebeccapurple", opacity: .5 }} >
       <Container>
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr:1 }} />
+          <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
           <Typography
             variant="h6"
             noWrap
             component="a"
             href="#app-bar-with-responsive-menu"
             sx={{
-              mr: 5,
+              mr: 2,
               display: { xs: "none", md: "flex" },
               fontFamily: "monospace",
               fontWeight: 700,
@@ -57,7 +62,7 @@ const navigate = useNavigate()
               textDecoration: "none",
             }}
           >
-            LOGO
+            <img src={logo2} style={{width: '100px', height: '100px'}} alt="" />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -116,7 +121,7 @@ const navigate = useNavigate()
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "red",
               textDecoration: "none",
             }}
           >
@@ -170,11 +175,14 @@ const navigate = useNavigate()
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={()=>handleCloseUserMenu(setting)}>
-                  <Typography textTransform="capitalize" textAlign="center">{setting}</Typography>
+              
+                <MenuItem  onClick={handleCloseUserMenu}>
+                  <Link to="/dashboard">Dashboard</Link>
                 </MenuItem>
-              ))}
+                <MenuItem  onClick={handleLogout}>
+                  <Link to="/dashboard">Logout</Link>
+                </MenuItem>
+              
             </Menu>
           </Box>
         </Toolbar>
