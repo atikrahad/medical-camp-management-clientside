@@ -1,3 +1,4 @@
+import Activities from "./Homecomponents/Activities";
 import Header from "./Homecomponents/Header";
 import Testimonials from "./Homecomponents/Testimonials";
 
@@ -7,6 +8,7 @@ const Home = () => {
         <div>
             <Header></Header>
             <Testimonials></Testimonials>
+            <Activities></Activities>
         </div>
     );
 };
