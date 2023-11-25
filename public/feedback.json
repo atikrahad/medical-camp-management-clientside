@@ -1,0 +1,44 @@
+[
+  {
+    "rating": 4.5,
+    "campName": "Healthy Hearts Clinic",
+    "date": "2023-03-15",
+    "feedback": "Attended the Healthy Hearts Clinic, and it was an informative experience. The medical professionals were friendly and answered all my questions.",
+    "authpic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRsynwv-5qtogtOwJbIjaPFJUmHpzhxgqIAug&usqp=CAU"
+  },
+  {
+    "rating": 5.0,
+    "campName": "Wellness Expo",
+    "date": "2023-04-02",
+    "feedback": "Exceptional services at the Wellness Expo! The organizers provided a wide range of health screenings, and the staff was knowledgeable and helpful.",
+    "authpic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjML1sDc9-mtLEizyN9zEue55tACbCwMCXEw&usqp=CAU"
+  },
+  {
+    "rating": 3.8,
+    "campName": "Vision Care Day",
+    "date": "2023-05-10",
+    "feedback": "Had a good experience at the Vision Care Day. The eye exams were thorough, and the optometrists were patient in explaining the results.",
+    "authpic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSEH14u7rKYD9aCAr-qRwTjpnXljCPuy4xbQSkW4HWJtCFReJNpt0-3ZW3MQyiyaIWoYyI&usqp=CAU"
+  },
+  {
+    "rating": 4.2,
+    "campName": "Dental Health Fair",
+    "date": "2023-06-25",
+    "feedback": "The Dental Health Fair was well-organized. The dental check-up was quick, and the dentists gave useful tips for maintaining oral health.",
+    "authpic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcqoYwJ4S775wlJh2WvQFM4i9rku81zOOvDQ&usqp=CAU"
+  },
+  {
+    "rating": 4.7,
+    "campName": "Mental Wellness Workshop",
+    "date": "2023-07-12",
+    "feedback": "Attended the Mental Wellness Workshop, and it was enlightening. The speakers were knowledgeable, and the atmosphere was supportive.",
+    "authpic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoRu_XCAEfBRG1EIsLaobDCfqAfCIkQmUHLw&usqp=CAU"
+  },
+  {
+    "rating": 4.0,
+    "campName": "Diabetes Awareness Camp",
+    "date": "2023-08-30",
+    "feedback": "The Diabetes Awareness Camp was beneficial. The healthcare professionals provided valuable information on managing diabetes, and the interactive sessions were engaging.",
+    "authpic": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRny6M7SVLugIiTJGIYPcr744JSqVf5oPe1Vg&usqp=CAU"
+  }
+]

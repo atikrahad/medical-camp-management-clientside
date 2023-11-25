@@ -43,7 +43,7 @@ function Navber() {
   }
 
   return (
-    <AppBar sx={{backgroundColor: "rebeccapurple", opacity: .5 }} >
+    <div className="bg-slate-600 bg-opacity-25 z-10 fixed w-full">
       <Container>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
@@ -187,7 +187,7 @@ function Navber() {
           </Box>
         </Toolbar>
       </Container>
-    </AppBar>
+    </div>
   );
 }
 export default Navber;
