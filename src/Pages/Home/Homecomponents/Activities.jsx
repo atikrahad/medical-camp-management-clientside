@@ -1,10 +1,11 @@
-import { Container, Grid, Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 
 const Activities = () => {
   return (
     <Grid sx={{ background: "gray" }}>
-      <Container
-        sx={{ display: "flex", justifyContent: "space-between", py: "50px" }}
+      <div
+        // sx={{ display: "flex", justifyContent: "space-between", py: "100px" }}
+        className="max-w-6xl py-20 gap-4 mx-auto flex md:flex-row flex-col items-center justify-between"
       >
         <Stack sx={{display:"flex", flexDirection: "column", alignItems: "center"}}>
           <Typography variant="h5">Total Attempted</Typography>
@@ -15,10 +16,10 @@ const Activities = () => {
           <Typography variant="h3">10</Typography>
         </Stack>
         <Stack sx={{display:"flex", flexDirection: "column", alignItems: "center"}}>
-          <Typography variant="h5">Our services in Bangladesh</Typography>
+          <Typography variant="h5">Our Services In Bangladesh</Typography>
           <Typography variant="h3">8 States</Typography>
         </Stack>
-      </Container>
+      </div>
     </Grid>
   );
 };
