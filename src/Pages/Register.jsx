@@ -1,15 +1,21 @@
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, OutlinedInput, TextField, Typography } from "@mui/material";
-import React from "react";
+import { Button, FormControl, Grid, IconButton, InputAdornment, InputLabel, MenuItem, OutlinedInput, Select, TextField, Typography } from "@mui/material";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 
 export default function Register() {
+  const [age, setAge] = useState('');
+  
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
-  const [showPassword, setShowPassword] = React.useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleChange = (event) => {
+    setAge(event.target.value);
+  };
 
   return (
     <Grid
@@ -33,13 +39,16 @@ export default function Register() {
           id="outlined-basic"
           {...register("name")}
           label="Name"
+          required
           variant="outlined"
         />
+        
         <TextField
           id="outlined-basic"
           {...register("email")}
           type="email"
           label="Email"
+          required
           variant="outlined"
         />
         
@@ -51,6 +60,7 @@ export default function Register() {
           <OutlinedInput
             id="outlined-adornment-password"
             {...register("password")}
+            required
             type={showPassword ? "text" : "password"}
             endAdornment={
               <InputAdornment position="end">
@@ -67,6 +77,22 @@ export default function Register() {
             label="Password"
           />
         </FormControl>
+        <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Feild</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Feild"
+          required
+          {...register("feild")}
+          onChange={handleChange}
+        >
+          <MenuItem value={'participants'}>Participants</MenuItem>
+          <MenuItem value={'healthcare'}>Healthcare</MenuItem>
+          <MenuItem value={'organizers'}>Organizers</MenuItem>
+        </Select>
+      </FormControl>
 
         <Button variant="contained" type="submit">Register</Button>
         <Grid sx={{ display: "flex", gap: "10px", alignItems: "baseline" }}>

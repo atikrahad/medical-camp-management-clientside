@@ -10,20 +10,20 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { Authinfo } from "../Shared/Authprovider";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => console.log(data);
   const [showPassword, setShowPassword] = React.useState(false);
+  const {email} = useContext(Authinfo)
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleGoogle = ()=> {
-    
-  }
+  
 
   return (
     <Grid
@@ -82,9 +82,6 @@ const Login = () => {
           <Typography>New here?</Typography>
           <Link to="/register">Register</Link>
         </Grid>
-        <Button onSubmit={handleGoogle} variant="contained">
-          Login with <Google></Google>
-        </Button>
       </form>
     </Grid>
   );
