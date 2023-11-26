@@ -1,4 +1,4 @@
-import { Google, Visibility, VisibilityOff } from "@mui/icons-material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import {
   Button,
   FormControl,
@@ -10,21 +10,30 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Authinfo } from "../Shared/Authprovider";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
-  const [showPassword, setShowPassword] = React.useState(false);
-  const {email} = useContext(Authinfo)
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
+  const [showPassword, setShowPassword] = useState(false);
+  const {loginEmail} = useContext(Authinfo)
   
-
+  const navigate = useNavigate()
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  
+  const onSubmit = (data) => {
+    loginEmail(data.email, data.password)
+    .then(user =>{
+      console.log(user);
+      navigate('/')
+    })
+    .then(error =>{
+      console.log(error);
+    })
+  };
+  
   return (
     <Grid
       sx={{

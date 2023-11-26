@@ -1,5 +1,5 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
+import CssBaseline from "@mui/material/CssBaseline";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -12,14 +12,16 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
-import { Link, NavLink, } from "react-router-dom";
-import logo1 from "../assets/Logo/HealTogether-removebg-preview.png"
-import logo2 from "../assets/Logo/HealTogether__1_-removebg-preview.png"
+import { Link, NavLink } from "react-router-dom";
 
+import logo2 from "../assets/Logo/HealTogether__1_-removebg-preview.png";
+import { Authinfo } from "./Authprovider";
 
 function Navber() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const { user, logOut } = React.useContext(Authinfo);
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -35,12 +37,11 @@ function Navber() {
 
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    
   };
 
-  const handleLogout = ()=> {
-
-  }
+  const handleLogout = () => {
+    logOut();
+  };
 
   return (
     <div className="bg-black bg-opacity-40 z-10 fixed w-full">
@@ -62,7 +63,11 @@ function Navber() {
               textDecoration: "none",
             }}
           >
-            <img src={logo2} style={{width: '100px', height: '100px'}} alt="" />
+            <img
+              src={logo2}
+              style={{ width: "100px", height: "100px" }}
+              alt=""
+            />
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -97,15 +102,22 @@ function Navber() {
               <MenuItem sx={{}}>
                 <NavLink to="/">Home</NavLink>
               </MenuItem>
+              {user && (
+                <MenuItem>
+                  <NavLink to="/available">Available Camps</NavLink>
+                </MenuItem>
+              )}
               <MenuItem>
                 <NavLink to="/about">About us</NavLink>
               </MenuItem>
               <MenuItem>
                 <NavLink to="/contact">Contact us</NavLink>
               </MenuItem>
-              <MenuItem>
-                <NavLink to="/register">Register</NavLink>
-              </MenuItem>
+              {!user && (
+                <MenuItem>
+                  <NavLink to="/register">Register</NavLink>
+                </MenuItem>
+              )}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -136,6 +148,13 @@ function Navber() {
                 Home
               </Button>
             </NavLink>
+            {user && (
+              <NavLink to="/available">
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  Available Camps
+                </Button>
+              </NavLink>
+            )}
             <NavLink to="/about">
               <Button sx={{ my: 2, color: "white", display: "block" }}>
                 About us
@@ -146,45 +165,53 @@ function Navber() {
                 Contact us
               </Button>
             </NavLink>
-            <NavLink to="/register">
-              <Button sx={{ my: 2, color: "white", display: "block" }}>
-                Register
-              </Button>
-            </NavLink>
+            {!user && (
+              <NavLink to="/register">
+                <Button sx={{ my: 2, color: "white", display: "block" }}>
+                  Register
+                </Button>
+              </NavLink>
+            )}
           </Box>
 
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              
-                <MenuItem  onClick={handleCloseUserMenu}>
+          {user ? (
+            <Box sx={{ flexGrow: 0 }}>
+              <Tooltip title="Open settings">
+                <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                  <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                </IconButton>
+              </Tooltip>
+              <Menu
+                sx={{ mt: "45px" }}
+                id="menu-appbar"
+                anchorEl={anchorElUser}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "right",
+                }}
+                open={Boolean(anchorElUser)}
+                onClose={handleCloseUserMenu}
+              >
+                <MenuItem onClick={handleCloseUserMenu}>
                   <Link to="/dashboard">Dashboard</Link>
                 </MenuItem>
-                <MenuItem  onClick={handleLogout}>
-                  <Link to="/dashboard">Logout</Link>
+                <MenuItem onClick={handleLogout}>
+                  <Link>Logout</Link>
                 </MenuItem>
-              
-            </Menu>
-          </Box>
+              </Menu>
+            </Box>
+          ) : (
+            <Link to="/login">
+              <Button color="primary" variant="contained">
+                Login
+              </Button>
+            </Link>
+          )}
         </Toolbar>
       </Container>
     </div>
