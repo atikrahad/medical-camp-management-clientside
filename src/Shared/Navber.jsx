@@ -43,7 +43,7 @@ function Navber() {
   }
 
   return (
-    <div className="bg-slate-600 bg-opacity-25 z-10 fixed w-full">
+    <div className="bg-black bg-opacity-40 z-10 fixed w-full">
       <Container>
         <Toolbar disableGutters>
           <AdbIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />

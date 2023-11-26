@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Navber from "../Shared/Navber";
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import Footer from "../Shared/Footer";
 
 
 const theme = createTheme({
@@ -20,6 +21,7 @@ const Homelayout = () => {
     <ThemeProvider theme={theme}>
       <Navber></Navber>
       <Outlet></Outlet>
+      <Footer></Footer>
     </ThemeProvider>
   );
 };
