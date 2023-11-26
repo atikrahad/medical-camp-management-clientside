@@ -8,6 +8,7 @@ import Register from "../Pages/Register";
 import Login from "../Pages/Login";
 import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
+import Available from "../Pages/Available/Available";
 
   const router = createBrowserRouter([
     {
@@ -25,6 +26,10 @@ import Contact from "../Pages/Contact/Contact";
         {
           path: 'contact',
           element: <Contact></Contact>
+        },
+        {
+          path:"available",
+          element: <Available></Available>
         }
       ]
     },
