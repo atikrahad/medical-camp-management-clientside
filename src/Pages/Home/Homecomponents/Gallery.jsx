@@ -17,7 +17,7 @@ export default function Gallery() {
         display: "flex",
         alignItems: "center",
         justifyContent: "normal",
-        
+        mb: "100px"
         
       }}>
       <br />

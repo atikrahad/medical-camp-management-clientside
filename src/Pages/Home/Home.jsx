@@ -1,3 +1,4 @@
+import Partnership from "../About/components/Partnership";
 import Activities from "./Homecomponents/Activities";
 import Gallery from "./Homecomponents/Gallery";
 import Header from "./Homecomponents/Header";
@@ -11,6 +12,7 @@ const Home = () => {
             <Testimonials></Testimonials>
             <Activities></Activities>
             <Gallery></Gallery>
+            <Partnership></Partnership>
         </div>
     );
 };
