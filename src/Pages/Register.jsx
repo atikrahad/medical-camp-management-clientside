@@ -16,6 +16,8 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Authinfo } from "../Shared/Authprovider";
+import axiosPublic from "../Api/axiospublic";
+import Swal from "sweetalert2";
 
 export default function Register() {
   const [age, setAge] = useState("");
@@ -29,6 +31,18 @@ export default function Register() {
       createAccountwithEmail(data.email, data.password)
         .then((user) => {
           console.log(user);
+          axiosPublic.post('/user', data)
+          .then(data => {
+            if(data.data){
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Successfully reigistered",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+          })
           navigate('/')
         })
         .then((error) => {

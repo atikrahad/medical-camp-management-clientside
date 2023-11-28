@@ -104,7 +104,7 @@ export default function Sideber() {
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
-      <AppBar position="fixed" sx={{opacity: '.5'}} open={open}>
+      <AppBar position="fixed" sx={{bgcolor: '#37474f'}} open={open}>
         <Toolbar>
           <IconButton
             color="inherit"
@@ -135,18 +135,18 @@ export default function Sideber() {
         </Toolbar>
       </AppBar>
 
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <IconButton onClick={handleDrawerClose}>
+      <Drawer  variant="permanent"   open={open}>
+        <DrawerHeader sx={{bgcolor:'#37474f'}}>
+          <IconButton  onClick={handleDrawerClose}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon />
             ) : (
-              <ChevronLeftIcon />
+              <ChevronLeftIcon sx={{color: 'white'}}/>
             )}
           </IconButton>
         </DrawerHeader>
-        <Divider />
-        <List>
+        <Divider sx={{bgcolor:'#37474f'}}/>
+        <List sx={{bgcolor:'#37474f'}}>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
@@ -170,8 +170,8 @@ export default function Sideber() {
             </ListItem>
           ))}
         </List>
-        <Divider />
-        <List>
+        <Divider sx={{bgcolor:'#78909c'}} />
+        <List sx={{bgcolor:'#37474f', height: '100%'}}>
           <ListItem disablePadding sx={{ display: "block" }}>
             <NavLink to="/dashboard/profile">
             <ListItemButton>

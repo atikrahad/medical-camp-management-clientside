@@ -1,14 +1,27 @@
 import { Outlet } from "react-router-dom";
 import Sideber from "../Shared/Sideber";
-import { Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
+import { styled, useTheme } from '@mui/material/styles';
 
 const Dashboard = () => {
+
+    const DrawerHeader = styled('div')(({ theme }) => ({
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        padding: theme.spacing(0, 1),
+        // necessary for content to be below app bar
+        ...theme.mixins.toolbar,
+      }));
   return (
-    <div>
+    <div className="bg-slate-800 h-[100vh]">
       <Sideber></Sideber>
-      <Grid sx={{pt:'100px', pl:'60px'}}>
+      
+      <Box component="main" sx={{ flexGrow: 1,ml:"50px", p: 3 }}>
+        <DrawerHeader />
         <Outlet></Outlet>
-      </Grid>
+      </Box>
+      
     </div>
   );
 };
