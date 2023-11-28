@@ -1,7 +1,8 @@
-import { Grid, Typography } from "@mui/material";
-import img from "../../assets/Logo/HealTogether__1_-removebg-preview.png";
+import { Button, Grid, Typography } from "@mui/material";
+import useUser from "../../Hooks/useUser";
 
 const Profile = () => {
+  const { users } = useUser();
   return (
     <div className="space-y-4">
       <Grid
@@ -9,35 +10,136 @@ const Profile = () => {
           bgcolor: "#37474f",
           display: "flex",
           alignItems: "center",
+          justifyContent: "space-between",
           gap: "20px",
-          boxShadow: "2px 4px 8px ",
+          boxShadow: "2px 4px 8px black",
+          borderRadius: "5px",
           p: "10px 20px",
         }}
       >
-        <img src={img} className="w-20 h-20 rounded-full" alt="" />
-        <Typography>Atik Rahad</Typography>
+        <Grid sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
+          <img
+            src={users.pic}
+            className="md:w-20 w-10 h-10 md:h-20 rounded-full"
+            alt=""
+          />
+
+          <Typography
+            sx={{ fontWeight: "700", fontSize: "1.5rem", color: "white" }}
+          >
+            {users.name}
+          </Typography>
+        </Grid>
+        
       </Grid>
       <Grid
-      spacing={3}
+        spacing={3}
         sx={{
           bgcolor: "#37474f",
-          boxShadow: "2px 4px 8px ",
+          boxShadow: "2px 4px 8px black",
+          borderRadius: "5px",
           p: "10px 20px",
-          
+          color: "#a6a6a6",
         }}
       >
-        <Grid sx={{ display: "flex", alignItems: "center" }}>
-          <Typography width={"20%"}>Name:</Typography>
-          <Typography>Atik Rahad</Typography>
+        <Grid sx={{ fontSize: "2rem", fontWeight: "700", color: "white" }}>
+          About me
         </Grid>
-        <Grid sx={{ display: "flex", alignItems: "center" }}>
-          <Typography width={"20%"}>Email:</Typography>
-          <Typography>atikrahad2gmail.com</Typography>
+        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center" }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            Name:
+          </Typography>
+          <Typography>{users.name}</Typography>
         </Grid>
-        <Grid sx={{ display: "flex", alignItems: "center" }}>
-          <Typography width={"20%"}>Number:</Typography>
-          <Typography>+8801615406742</Typography>
+        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center", flexWrap:'wrap' }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            Email:
+          </Typography>
+          <Typography>{users.email}</Typography>
         </Grid>
+        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center" }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            Number:
+          </Typography>
+          <Typography>{users.number ? users.number : "N/A"}</Typography>
+        </Grid>
+        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center" }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            Role:
+          </Typography>
+          <Typography>{users.feild}</Typography>
+        </Grid>
+      </Grid>
+
+      <Grid
+        spacing={3}
+        sx={{
+          bgcolor: "#37474f",
+          boxShadow: "2px 4px 8px black",
+          borderRadius: "5px",
+          p: "10px 20px",
+          color: "#a6a6a6",
+        }}
+      >
+        <Grid sx={{ fontSize: "2rem", fontWeight: "700", color: "white" }}>
+          Address
+        </Grid>
+
+        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            Country:
+          </Typography>
+          <Typography>{users.country ? users.country : "N/A"}</Typography>
+        </Grid>
+        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            State:
+          </Typography>
+          <Typography>{users.state ? users.state : "N/A"}</Typography>
+        </Grid>
+        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            City:
+          </Typography>
+          <Typography>{users.city ? users.city : "N/A"}</Typography>
+        </Grid>
+        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+          <Typography
+            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
+            
+          >
+            Local address:
+          </Typography>
+          <Typography>
+            {users.localaddress ? users.localaddress : "N/A"}
+          </Typography>
+        </Grid>
+      </Grid>
+      <Grid>
+      <Button variant="contained" color="primary">
+          Update
+        </Button>
       </Grid>
     </div>
   );

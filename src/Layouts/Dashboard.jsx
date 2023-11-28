@@ -14,10 +14,10 @@ const Dashboard = () => {
         ...theme.mixins.toolbar,
       }));
   return (
-    <div className="bg-slate-800 h-[100vh]">
+    <div>
       <Sideber></Sideber>
       
-      <Box component="main" sx={{ flexGrow: 1,ml:"50px", p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, bgcolor:'#0F172A', height:{xs:'100%', lg:'110vh'}, ml:"50px", p: 3 }}>
         <DrawerHeader />
         <Outlet></Outlet>
       </Box>
