@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Sideber from "../Shared/Sideber";
-import { Box, Grid, Typography } from "@mui/material";
-import { styled, useTheme } from '@mui/material/styles';
+import { Box, } from "@mui/material";
+import { styled, } from '@mui/material/styles';
 
 const Dashboard = () => {
 
@@ -17,7 +17,7 @@ const Dashboard = () => {
     <div>
       <Sideber></Sideber>
       
-      <Box component="main" sx={{ flexGrow: 1, bgcolor:'#0F172A', height:{xs:'100%', lg:'110vh'}, ml:"50px", p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, bgcolor:'#0F172A', minHeight:{xs:'100%', lg:'100vh'}, ml:"50px", p: 3 }}>
         <DrawerHeader />
         <Outlet></Outlet>
       </Box>

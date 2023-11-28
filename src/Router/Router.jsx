@@ -8,6 +8,7 @@ import Contact from "../Pages/Contact/Contact";
 import Available from "../Pages/Available/Available";
 import Dashboard from "../Layouts/Dashboard";
 import Profile from "../Pages/Dashboard/Profile";
+import Addcamp from "../Pages/Dashboard/Addcamp";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
         path: "/dashboard/profile",
         element: <Profile></Profile>,
       },
+      {
+        path: "/dashboard/addcamp",
+        element: <Addcamp></Addcamp>
+      }
     ],
   },
   {
