@@ -13,6 +13,9 @@ import Profile from "../Pages/Dashboard/Profile/Profile";
 import Updateprofile from "../Pages/Dashboard/Profile/Updateprofile";
 import Details from "../Pages/Details/Details";
 import Managecamp from "../Pages/Dashboard/Managecamp";
+import Organizer from "../Pages/Dashboard/Organizer";
+import PrivateRoute from "../Private/PrivateRoute";
+import Privateorganizer from "../Private/Privateorganizer";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +28,7 @@ const router = createBrowserRouter([
       },
       {
         path:'details',
-        element: <Details></Details>
+        element: <PrivateRoute><Details></Details></PrivateRoute>
       },
       {
         path: "about",
@@ -37,29 +40,33 @@ const router = createBrowserRouter([
       },
       {
         path: "available",
-        element: <Available></Available>,
+        element: <PrivateRoute><Available></Available></PrivateRoute>,
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
       {
         path: "/dashboard/profile",
-        element: <Profile></Profile>,
+        element: <PrivateRoute><Profile></Profile></PrivateRoute>,
       },
       {
         path: "/dashboard/updateprofile",
-        element:<Updateprofile></Updateprofile>
+        element: <PrivateRoute><Updateprofile></Updateprofile></PrivateRoute>
       },
       {
         path: "/dashboard/addcamp",
-        element: <Addcamp></Addcamp>
+        element: <Privateorganizer><Addcamp></Addcamp></Privateorganizer>
       },
       {
         path: '/dashboard/managecamp',
-        element: <Managecamp></Managecamp>
+        element: <Privateorganizer><Managecamp></Managecamp></Privateorganizer>
+      },
+      {
+        index: true,
+        element: <Privateorganizer><Organizer></Organizer></Privateorganizer>
       }
     ],
   },

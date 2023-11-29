@@ -14,7 +14,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { Grid } from "@mui/material";
-import { AccountCircle, Home, LibraryAdd, ManageSearch, Settings } from "@mui/icons-material";
+import { AccountCircle, Bungalow, Home, LibraryAdd, ManageSearch, Settings } from "@mui/icons-material";
 
 import Slidernav from "../Components/Slidernav";
 import { NavLink } from "react-router-dom";
@@ -150,6 +150,11 @@ export default function Sideber() {
         </DrawerHeader>
         <Divider sx={{ bgcolor: "#37474f" }} />
         <List sx={{ bgcolor: "#37474f" }}>
+          <Slidernav
+            name={"Dashboard"}
+            link={"/dashboard"}
+            icon={<Bungalow></Bungalow>}
+          ></Slidernav>
           <Slidernav
             name={"Add Camp"}
             link={"/dashboard/addcamp"}
