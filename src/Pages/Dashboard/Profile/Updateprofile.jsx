@@ -2,26 +2,19 @@ import {
   Button,
   FormControl,
   Grid,
-  
   InputLabel,
   MenuItem,
-  
   Select,
   TextField,
-  
 } from "@mui/material";
 
 import { useForm } from "react-hook-form";
 
 
-import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
-import { useState } from "react";
 
-const Addcamp = () => {
+const Updateprofile = () => {
   const { register, handleSubmit } = useForm();
-  const [startDate, setStartDate] = useState(new Date());
   const onSubmit = (data) => {
     console.log(data);
   };
@@ -37,29 +30,38 @@ const Addcamp = () => {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: "center",
-            gap:'20px'
+            gap: "20px",
           }}
         >
           <TextField
             id="outlined-basic"
-            {...register("campName")}
+            {...register("name")}
             type="text"
-            label="Camp name"
+            label="Your Name"
             sx={{}}
             fullWidth
             variant="outlined"
           />
-          
-          <input type="file" {...register("campimg")} className="text-white w-full md:ml-4 my-5" />
-          
-
-          <DatePicker
-            className="bg-transparent border border-slate-600 text-slate-400 py-3"
-            selected={startDate}
-            {...register("date")}
-            withPortal
-            onChange={(date) => setStartDate(date)}
+          <TextField
+            id="outlined-basic"
+            {...register("email")}
+            type="text"
+            label="Your Email"
+            sx={{}}
+            fullWidth
+            variant="outlined"
           />
+          <TextField
+            id="outlined-basic"
+            {...register("number")}
+            type="text"
+            label="Phone Number"
+            sx={{}}
+            fullWidth
+            variant="outlined"
+          />
+
+          
         </Grid>
         <Grid
           sx={{
@@ -67,14 +69,14 @@ const Addcamp = () => {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: "center",
-            gap: '30px'
+            gap: "30px",
           }}
         >
           <TextField
             id="outlined-basic"
-            {...register("fees")}
+            {...register("country")}
             type="number"
-            label="Fees"
+            label="Country"
             fullWidth
             sx={{}}
             variant="outlined"
@@ -85,10 +87,10 @@ const Addcamp = () => {
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
-              {...register("division")}
-            //   value={age}
+              {...register("state")}
+              //   value={age}
               label="Division"
-            //   onChange={handleChange}
+              //   onChange={handleChange}
             >
               <MenuItem value={"dhaka"}>Dhaka</MenuItem>
               <MenuItem value={"rajshahi"}>Rajshahi</MenuItem>
@@ -99,27 +101,26 @@ const Addcamp = () => {
               <MenuItem value={"khulna"}>Khulna</MenuItem>
               <MenuItem value={"borisal"}>Borisal</MenuItem>
               <MenuItem value={"moymonshing"}>Moymonshing</MenuItem>
-              
             </Select>
           </FormControl>
 
           <TextField
             id="outlined-basic"
-            {...register("vanueLocation")}
+            {...register("city")}
             type="text"
             fullWidth
-            label="Vanue location"
+            label="City"
             sx={{}}
             variant="outlined"
           />
         </Grid>
-        <Grid
+        {/* <Grid
           sx={{
             display: "flex",
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: "center",
-            gap: '30px'
+            gap: "30px",
           }}
         >
           <TextField
@@ -133,22 +134,22 @@ const Addcamp = () => {
           />
 
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Target Audiance</InputLabel>
+            <InputLabel id="demo-simple-select-label">
+              Target Audiance
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               {...register("audianceType")}
-            //   value={age}
+              //   value={age}
               label="Target Audiance"
-            //   onChange={handleChange}
+              //   onChange={handleChange}
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"children"}>Children</MenuItem>
               <MenuItem value={"male"}>Male</MenuItem>
               <MenuItem value={"famele"}>Famele</MenuItem>
               <MenuItem value={"old"}>Old</MenuItem>
-              
-              
             </Select>
           </FormControl>
 
@@ -161,23 +162,29 @@ const Addcamp = () => {
             sx={{}}
             variant="outlined"
           />
+        </Grid> */}
+
+        <Grid sx={{display:'flex'}}>
+          <TextField
+            id="outlined-multiline-static"
+            label="Local Address"
+            multiline
+            rows={2}
+            {...register("localAddress")}
+          />
+          <input
+            type="file"
+            {...register("pic")}
+            className="text-white w-full md:ml-4 my-5"
+          />
         </Grid>
 
-        <TextField
-          id="outlined-multiline-static"
-          label="Comprehensive Description"
-          multiline
-          rows={4}
-          {...register("comprehensiveDescription")}
-        />
-
         <Button variant="contained" type="submit">
-          Add camp
+          Update Profile
         </Button>
-        
       </form>
     </div>
   );
 };
 
-export default Addcamp;
+export default Updateprofile;

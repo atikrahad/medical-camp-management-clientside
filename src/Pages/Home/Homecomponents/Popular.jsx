@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import Popularcard from "../../../Components/Popularcard";
+import Headline from "../../../Shared/Headline";
 
 const Popular = () => {
   const [loadpopular, setLoadpopular] = useState([]);
@@ -10,11 +11,14 @@ const Popular = () => {
       .then((data) => setLoadpopular(data));
   }, []);
   return (
-    <div className="max-w-6xl gap-4 mx-auto py-20 grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3">
+    <div>
+      <Headline title={"Popular Camp"}></Headline>
+      <div className="max-w-6xl gap-4 mx-auto  grid grid-cols-1, md:grid-cols-2 lg:grid-cols-3">
        
-      {loadpopular.slice(0, 6).map((data, index) => (
-        <Popularcard key={index} data={data}></Popularcard>
-      ))}
+       {loadpopular.slice(0, 6).map((data, index) => (
+         <Popularcard key={index} data={data}></Popularcard>
+       ))}
+     </div>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import Headline from "../../../Shared/Headline";
 
 export default function Testimonials() {
   const [loadfeedback, setLoadfeedback] = useState([]);
@@ -24,7 +25,8 @@ export default function Testimonials() {
   console.log(loadfeedback);
 
   return (
-    <Grid sx={{py: "100px"}}>
+    <Grid sx={{py: "50px"}}>
+      <Headline title={"Testimonials"}></Headline>
       <br />
       <Swiper
         watchSlidesProgress={true}

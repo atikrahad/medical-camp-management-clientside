@@ -9,6 +9,7 @@ import img4 from "../../../assets/Partnership/2.png"
 import "swiper/css";
 
 import { Grid } from "@mui/material";
+import Headline from "../../../Shared/Headline";
 
 export default function Partnership() {
   
@@ -16,6 +17,7 @@ export default function Partnership() {
 
   return (
     <Grid >
+      <Headline title={"Partnarship"}></Headline>
       <br />
       <Swiper
         watchSlidesProgress={true}

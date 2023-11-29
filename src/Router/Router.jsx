@@ -7,8 +7,10 @@ import About from "../Pages/About/About";
 import Contact from "../Pages/Contact/Contact";
 import Available from "../Pages/Available/Available";
 import Dashboard from "../Layouts/Dashboard";
-import Profile from "../Pages/Dashboard/Profile";
+
 import Addcamp from "../Pages/Dashboard/Addcamp";
+import Profile from "../Pages/Dashboard/Profile/Profile";
+import Updateprofile from "../Pages/Dashboard/Profile/Updateprofile";
 
 const router = createBrowserRouter([
   {
@@ -40,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/profile",
         element: <Profile></Profile>,
+      },
+      {
+        path: "/dashboard/updateprofile",
+        element:<Updateprofile></Updateprofile>
       },
       {
         path: "/dashboard/addcamp",

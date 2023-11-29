@@ -12,14 +12,11 @@ import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+
 import { Grid } from "@mui/material";
-import { AccountCircle, Settings } from "@mui/icons-material";
+import { AccountCircle, Home, LibraryAdd, Settings } from "@mui/icons-material";
+
+import Slidernav from "../Components/Slidernav";
 import { NavLink } from "react-router-dom";
 
 const drawerWidth = 240;
@@ -130,7 +127,10 @@ export default function Sideber() {
             <Typography variant="h6" noWrap component="div">
               Dashboard
             </Typography>
-            <Settings></Settings>
+            <Grid >
+             <NavLink to="/"> <Home></Home></NavLink>
+            <Settings sx={{ml:'10px'}}></Settings>
+            </Grid>
           </Grid>
         </Toolbar>
       </AppBar>
@@ -147,72 +147,13 @@ export default function Sideber() {
         </DrawerHeader>
         <Divider sx={{bgcolor:'#37474f'}}/>
         <List sx={{bgcolor:'#37474f'}}>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
-              <ListItemButton
-                sx={{
-                  minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
-                  px: 2.5,
-                }}
-              >
-                <ListItemIcon
-                  sx={{
-                    minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
-                  }}
-                >
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <Slidernav name={"Add Camp"} link={"/dashboard/addcamp"} icon={<LibraryAdd></LibraryAdd>}></Slidernav>
         </List>
         <Divider sx={{bgcolor:'#78909c'}} />
         <List sx={{bgcolor:'#37474f', height: '100%'}}>
-          <ListItem disablePadding sx={{ display: "block" }}>
-            <NavLink to="/dashboard/profile">
-            <ListItemButton>
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                  justifyContent: "center",
-                  display: "flex",
-                  flexDirection: "column",
-                }}
-              >
-                <AccountCircle></AccountCircle>
-              </ListItemIcon>
-
-              <ListItemText
-                primary={"Profile"}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-            </NavLink>
-          </ListItem>
-          <ListItem disablePadding sx={{ display: "block" }}>
-            <NavLink>
-            <ListItemButton>
-              <ListItemIcon
-                sx={{
-                  minWidth: 0,
-                  mr: open ? 3 : "auto",
-                }}
-              >
-                <Settings></Settings>
-              </ListItemIcon>
-
-              <ListItemText
-                primary={"Settings"}
-                sx={{ opacity: open ? 1 : 0 }}
-              />
-            </ListItemButton>
-            </NavLink>
-          </ListItem>
+          
+          <Slidernav name={"Profile"} icon={<AccountCircle></AccountCircle>} link={"/dashboard/profile"}></Slidernav>
+          <Slidernav name={"Setting"} icon={<Settings></Settings>} link={"/dashboard/setting"}></Slidernav>
         </List>
       </Drawer>
     </Box>

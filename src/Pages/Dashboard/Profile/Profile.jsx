@@ -1,5 +1,6 @@
 import { Button, Grid, Typography } from "@mui/material";
-import useUser from "../../Hooks/useUser";
+import useUser from "../../../Hooks/useUser";
+import { NavLink } from "react-router-dom";
 
 const Profile = () => {
   const { users } = useUser();
@@ -30,7 +31,6 @@ const Profile = () => {
             {users.name}
           </Typography>
         </Grid>
-        
       </Grid>
       <Grid
         spacing={3}
@@ -45,37 +45,40 @@ const Profile = () => {
         <Grid sx={{ fontSize: "2rem", fontWeight: "700", color: "white" }}>
           About me
         </Grid>
-        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center" }}>
+        <Grid sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             Name:
           </Typography>
           <Typography>{users.name}</Typography>
         </Grid>
-        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center", flexWrap:'wrap' }}>
+        <Grid
+          sx={{
+            display: "flex",
+            gap: "10px",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             Email:
           </Typography>
           <Typography>{users.email}</Typography>
         </Grid>
-        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center" }}>
+        <Grid sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             Number:
           </Typography>
           <Typography>{users.number ? users.number : "N/A"}</Typography>
         </Grid>
-        <Grid sx={{ display: "flex", gap:'10px', alignItems: "center" }}>
+        <Grid sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             Role:
           </Typography>
@@ -97,37 +100,61 @@ const Profile = () => {
           Address
         </Grid>
 
-        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+        <Grid
+          sx={{
+            display: "flex",
+            gap: "10px",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             Country:
           </Typography>
           <Typography>{users.country ? users.country : "N/A"}</Typography>
         </Grid>
-        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+        <Grid
+          sx={{
+            display: "flex",
+            gap: "10px",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             State:
           </Typography>
           <Typography>{users.state ? users.state : "N/A"}</Typography>
         </Grid>
-        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+        <Grid
+          sx={{
+            display: "flex",
+            gap: "10px",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             City:
           </Typography>
           <Typography>{users.city ? users.city : "N/A"}</Typography>
         </Grid>
-        <Grid sx={{ display: "flex", gap:'10px', flexWrap:'wrap', alignItems: "center" }}>
+        <Grid
+          sx={{
+            display: "flex",
+            gap: "10px",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <Typography
-            sx={{ fontWeight: "700",width:{md:"50%"}, color: "#cccccc" }}
-            
+            sx={{ fontWeight: "700", width: { md: "50%" }, color: "#cccccc" }}
           >
             Local address:
           </Typography>
@@ -137,9 +164,11 @@ const Profile = () => {
         </Grid>
       </Grid>
       <Grid>
-      <Button variant="contained" color="primary">
-          Update
-        </Button>
+        <NavLink to="/dashboard/updateprofile">
+          <Button variant="contained" color="primary">
+            Update
+          </Button>
+        </NavLink>
       </Grid>
     </div>
   );

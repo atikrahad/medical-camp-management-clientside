@@ -5,21 +5,23 @@ import img from "../../../assets/homepic/cdc-vt7iAyiwpf0-unsplash.jpg"
 import "swiper/css";
 
 import { Grid } from "@mui/material";
+import Headline from "../../../Shared/Headline";
 
 export default function Gallery() {
   
   
 
   return (
-    <Grid sx={{
+    <Grid className="max-w-6xl my-20 py-10 rounded-md mx-auto" sx={{
         background: `linear-gradient(to bottom, rgba(0, 25, 50, .8), rgba(0, 25, 50, .8)), url(${img})`,
         backgroundSize: "cover",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "normal",
-        mb: "100px"
+        // display: "flex",
+        // flexDirection: 'column',
+        // alignItems: "center",
+        // justifyContent:'normal'
         
       }}>
+      <Headline color={"white"} title={"Camp Gallery"}></Headline>
       <br />
       <Swiper
         watchSlidesProgress={true}
@@ -30,7 +32,7 @@ export default function Gallery() {
             disableOnInteraction: false,
           }}
         modules={[Autoplay]}
-        className="mySwiper max-w-6xl my-20 mx-auto"
+        className="mySwiper max-w-5xl mb-20 mx-auto"
       >
         
           <SwiperSlide >
