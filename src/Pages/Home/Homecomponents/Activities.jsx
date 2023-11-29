@@ -1,6 +1,9 @@
 import { Grid, Stack, Typography } from "@mui/material";
+import useCampcount from "../../../Hooks/useCampcount";
 
 const Activities = () => {
+  const [campcount] = useCampcount()
+  console.log(campcount);
   return (
     <Grid sx={{ background: "gray" }}>
       <div
@@ -13,7 +16,7 @@ const Activities = () => {
         </Stack>
         <Stack sx={{display:"flex", flexDirection: "column", alignItems: "center"}}>
           <Typography variant="h5">Total Camps</Typography>
-          <Typography variant="h3">10</Typography>
+          <Typography variant="h3">{campcount.count}</Typography>
         </Stack>
         <Stack sx={{display:"flex", flexDirection: "column", alignItems: "center"}}>
           <Typography variant="h5">Our Services In Bangladesh</Typography>
