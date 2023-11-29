@@ -12,6 +12,7 @@ import Addcamp from "../Pages/Dashboard/Addcamp";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import Updateprofile from "../Pages/Dashboard/Profile/Updateprofile";
 import Details from "../Pages/Details/Details";
+import Managecamp from "../Pages/Dashboard/Managecamp";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/addcamp",
         element: <Addcamp></Addcamp>
+      },
+      {
+        path: '/dashboard/managecamp',
+        element: <Managecamp></Managecamp>
       }
     ],
   },
