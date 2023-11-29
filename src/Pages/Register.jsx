@@ -18,10 +18,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { Authinfo } from "../Shared/Authprovider";
 import axiosPublic from "../Api/axiospublic";
 import Swal from "sweetalert2";
+import useUser from "../Hooks/useUser";
 
 export default function Register() {
   const [age, setAge] = useState("");
   const { createAccountwithEmail } = useContext(Authinfo);
+  const [,refetch] = useUser()
 
   const { register, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
@@ -42,6 +44,8 @@ export default function Register() {
                 timer: 1500
               });
             }
+            refetch()
+
           })
           navigate('/')
         })

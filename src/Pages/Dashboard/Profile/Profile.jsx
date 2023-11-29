@@ -3,7 +3,8 @@ import useUser from "../../../Hooks/useUser";
 import { NavLink } from "react-router-dom";
 
 const Profile = () => {
-  const { users } = useUser();
+  const [users] = useUser();
+  console.log(users);
   return (
     <div className="space-y-4">
       <Grid
@@ -19,11 +20,11 @@ const Profile = () => {
         }}
       >
         <Grid sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          <img
+          {/* <img
             src={users.pic}
             className="md:w-20 w-10 h-10 md:h-20 rounded-full"
             alt=""
-          />
+          /> */}
 
           <Typography
             sx={{ fontWeight: "700", fontSize: "1.5rem", color: "white" }}

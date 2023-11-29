@@ -5,7 +5,7 @@ import useUser from "../Hooks/useUser";
 
 const Privateorganizer = ({ children }) => {
   const { loading } = useAuth();
-  const {users} = useUser()
+  const [users] = useUser()
   const location = useLocation()
   console.log(location);
   if (loading) {

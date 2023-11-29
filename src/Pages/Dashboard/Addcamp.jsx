@@ -2,28 +2,78 @@ import {
   Button,
   FormControl,
   Grid,
-  
   InputLabel,
   MenuItem,
-  
   Select,
   TextField,
-  
 } from "@mui/material";
 
 import { useForm } from "react-hook-form";
-
 
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 
+import axiosPublic from "../../Api/axiospublic";
+import axiosSecure from "../../Api/axiosSecure";
+import useUser from "../../Hooks/useUser";
+import Swal from "sweetalert2";
+
 const Addcamp = () => {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [startDate, setStartDate] = useState(new Date());
-  const onSubmit = (data) => {
+  const [users] = useUser();
+
+  const image_api =
+    "https://api.imgbb.com/1/upload?key=7fa3563ebeba8875d6f06cc577afb44e";
+
+  const onSubmit = async (data) => {
     console.log(data);
+    // console.log(data.campImage[0]);
+    const image = data.campImage[0];
+    const imgdata = new FormData();
+    imgdata.append("image", image);
+
+    // fetch(`${image_api}`,{
+    //   method: "POST",
+    //   body: imgdata
+    // })
+    // .then(res => res.json())
+    // .then(data => console.log(data))
+
+    const res = await axiosPublic.post(image_api, imgdata, {});
+
+    if (res.data.success) {
+      const campItem = {
+        campName: data.campName,
+        vanue: data.vanue,
+        fees: parseFloat(data.fees),
+        division: data.division,
+        date: startDate,
+        vanueLocation: data.vanueLocation,
+        audianceType: data.audianceType,
+        healthcareWorker: data.healthcareWorker,
+        comprehensiveDescription: data.comprehensiveDescription,
+        image: res.data.data.display_url,
+        organaizerName: users.name,
+        organaizerEmail: users.email,
+      };
+      console.log(campItem);
+      axiosSecure.post("/camp", campItem).then((res) => {
+        console.log(res);
+        reset()
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Your work has been saved",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+    }
+
+    
   };
   return (
     <div className="bg-[#37474f] p-5 rounded-md">
@@ -37,7 +87,7 @@ const Addcamp = () => {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: "center",
-            gap:'20px'
+            gap: "20px",
           }}
         >
           <TextField
@@ -49,9 +99,12 @@ const Addcamp = () => {
             fullWidth
             variant="outlined"
           />
-          
-          <input type="file" {...register("campimg")} className="text-white w-full md:ml-4 my-5" />
-          
+
+          <input
+            type="file"
+            {...register("campImage")}
+            className="text-white w-full md:ml-4 my-5"
+          />
 
           <DatePicker
             className="bg-transparent border border-slate-600 text-slate-400 py-3"
@@ -67,7 +120,7 @@ const Addcamp = () => {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: "center",
-            gap: '30px'
+            gap: "30px",
           }}
         >
           <TextField
@@ -86,9 +139,9 @@ const Addcamp = () => {
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               {...register("division")}
-            //   value={age}
+              //   value={age}
               label="Division"
-            //   onChange={handleChange}
+              //   onChange={handleChange}
             >
               <MenuItem value={"dhaka"}>Dhaka</MenuItem>
               <MenuItem value={"rajshahi"}>Rajshahi</MenuItem>
@@ -99,7 +152,6 @@ const Addcamp = () => {
               <MenuItem value={"khulna"}>Khulna</MenuItem>
               <MenuItem value={"borisal"}>Borisal</MenuItem>
               <MenuItem value={"moymonshing"}>Moymonshing</MenuItem>
-              
             </Select>
           </FormControl>
 
@@ -119,36 +171,36 @@ const Addcamp = () => {
             flexDirection: { xs: "column", md: "row" },
             justifyContent: "space-between",
             alignItems: "center",
-            gap: '30px'
+            gap: "30px",
           }}
         >
           <TextField
             id="outlined-basic"
-            {...register("services")}
+            {...register("vanue")}
             type="text"
-            label="Type of services"
+            label="Type of vanue"
             fullWidth
             sx={{}}
             variant="outlined"
           />
 
           <FormControl fullWidth>
-            <InputLabel id="demo-simple-select-label">Target Audiance</InputLabel>
+            <InputLabel id="demo-simple-select-label">
+              Target Audiance
+            </InputLabel>
             <Select
               labelId="demo-simple-select-label"
               id="demo-simple-select"
               {...register("audianceType")}
-            //   value={age}
+              //   value={age}
               label="Target Audiance"
-            //   onChange={handleChange}
+              //   onChange={handleChange}
             >
               <MenuItem value={"all"}>All</MenuItem>
               <MenuItem value={"children"}>Children</MenuItem>
               <MenuItem value={"male"}>Male</MenuItem>
               <MenuItem value={"famele"}>Famele</MenuItem>
               <MenuItem value={"old"}>Old</MenuItem>
-              
-              
             </Select>
           </FormControl>
 
@@ -174,7 +226,6 @@ const Addcamp = () => {
         <Button variant="contained" type="submit">
           Add camp
         </Button>
-        
       </form>
     </div>
   );
