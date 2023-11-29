@@ -11,6 +11,7 @@ import Dashboard from "../Layouts/Dashboard";
 import Addcamp from "../Pages/Dashboard/Addcamp";
 import Profile from "../Pages/Dashboard/Profile/Profile";
 import Updateprofile from "../Pages/Dashboard/Profile/Updateprofile";
+import Details from "../Pages/Details/Details";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,10 @@ const router = createBrowserRouter([
       {
         index: true,
         element: <Home></Home>,
+      },
+      {
+        path:'details',
+        element: <Details></Details>
       },
       {
         path: "about",
