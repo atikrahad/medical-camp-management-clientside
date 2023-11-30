@@ -16,6 +16,7 @@ import Managecamp from "../Pages/Dashboard/Managecamp";
 import Organizer from "../Pages/Dashboard/Organizer";
 import PrivateRoute from "../Private/PrivateRoute";
 import Privateorganizer from "../Private/Privateorganizer";
+import axiosSecure from "../Api/axiosSecure";
 
 const router = createBrowserRouter([
   {
@@ -27,8 +28,9 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path:'details',
-        element: <PrivateRoute><Details></Details></PrivateRoute>
+        path:'campdetails/:id',
+        element: <PrivateRoute><Details></Details></PrivateRoute>,
+        loader: ({params})=> axiosSecure(`/campdetails/${params.id}`) 
       },
       {
         path: "about",

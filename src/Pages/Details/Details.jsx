@@ -7,10 +7,16 @@ import { useForm } from "react-hook-form";
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
+import { useLoaderData } from "react-router-dom";
+import useUser from "../../Hooks/useUser";
 
 export default function Details() {
   const { register, handleSubmit } = useForm();
   const [value, setValue] = React.useState(2);
+  const {data} = useLoaderData()
+  const [users] = useUser()
+
+  console.log(data)
   const onSubmit = (data) => {
     console.log(data);
     console.log(value);
@@ -18,7 +24,7 @@ export default function Details() {
 
   return (
     <Container maxWidth={"md"} sx={{ py: { xs: "100px", md: "120px" } }}>
-      <img src={img} className="w-full rounded-md" alt="" />
+      <img src={data.image} className="w-full rounded-md" alt="" />
       <CardContent>
         <Grid
           sx={{
@@ -28,9 +34,9 @@ export default function Details() {
           }}
         >
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {data.campName}
           </Typography>
-          <Typography>Date</Typography>
+          <Typography>{data.date}</Typography>
         </Grid>
         <Grid
           sx={{
@@ -41,55 +47,61 @@ export default function Details() {
           }}
         >
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {data.vanue}
           </Typography>
-          <Typography>Date</Typography>
+          <Typography>{data.audianceType}</Typography>
+          <Typography>{data.vanueLocation}</Typography>
+          <Typography>{data.fees}</Typography>
         </Grid>
 
-        <Joinmodal></Joinmodal>
+        {
+          !(users.feild == 'organizers') && <Joinmodal></Joinmodal>
 
+        }
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {data.comprehensiveDescription}
         </Typography>
-        <form
-        className="w-full md:w-1/2"
-          style={{
-            display: "flex",
-            padding: "25px 0",
-            gap: "30px",
-            flexDirection: "column",
-          }}
-          onSubmit={handleSubmit(onSubmit)}
-        >
-          <Box
-            sx={{
-              "& > legend": { mt: 2 },
+        {
+          (data.date === new Date() && users.feild!== 'organizers') && <form
+          className="w-full md:w-1/2"
+            style={{
+              display: "flex",
+              padding: "25px 0",
+              gap: "30px",
+              flexDirection: "column",
             }}
+            onSubmit={handleSubmit(onSubmit)}
           >
-            <Typography component="legend">Rate our services</Typography>
-            <Rating
-              name="simple-controlled"
-              value={value}
-              
-              onChange={(event, newValue) => {
-                setValue(newValue);
+            <Box
+              sx={{
+                "& > legend": { mt: 2 },
               }}
+            >
+              <Typography component="legend">Rate our services</Typography>
+              <Rating
+                name="simple-controlled"
+                value={value}
+                
+                onChange={(event, newValue) => {
+                  setValue(newValue);
+                }}
+              />
+            </Box>
+  
+            <TextField
+              id="outlined-multiline-static"
+              label="Comment"
+              multiline
+              rows={4}
+              {...register("addres")}
             />
-          </Box>
-
-          <TextField
-            id="outlined-multiline-static"
-            label="Comment"
-            multiline
-            rows={4}
-            {...register("addres")}
-          />
-
-          <Button variant="contained" type="submit">
-            Review
-          </Button>
-        </form>
+  
+            <Button variant="contained" type="submit">
+              Review
+            </Button>
+          </form>
+        }
+        
       </CardContent>
     </Container>
   );

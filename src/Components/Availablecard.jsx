@@ -27,7 +27,7 @@ export default function Availablecard({ data }) {
         title={data.name}
         subheader={data.date}
       />
-      <img src={data.img} className="w-full h-44" alt="" />
+      <img src={data.image} className="w-full h-44" alt="" />
       <CardContent>
         <Typography variant="body2" color="text.secondary">
           {data.comprehensiveDescription}
@@ -40,7 +40,7 @@ export default function Availablecard({ data }) {
         <IconButton aria-label="share">
           <ShareIcon />
         </IconButton>
-        <NavLink to="/details">
+        <NavLink to={`/campdetails/${data._id}`}>
           <Button>View Details</Button>
         </NavLink>
       </CardActions>

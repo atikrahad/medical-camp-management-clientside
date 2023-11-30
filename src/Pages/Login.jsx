@@ -14,6 +14,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { Authinfo } from "../Shared/Authprovider";
+import axiosPublic from "../Api/axiospublic";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
@@ -24,9 +25,11 @@ const Login = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   
   const onSubmit = (data) => {
+    const email = data.email
     loginEmail(data.email, data.password)
     .then(user =>{
       console.log(user);
+      
       navigate('/')
     })
     .then(error =>{
