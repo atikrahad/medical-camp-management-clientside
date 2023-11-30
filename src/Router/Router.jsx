@@ -17,6 +17,7 @@ import Organizer from "../Pages/Dashboard/Organizer";
 import PrivateRoute from "../Private/PrivateRoute";
 import Privateorganizer from "../Private/Privateorganizer";
 import axiosSecure from "../Api/axiosSecure";
+import Registered from "../Pages/Dashboard/Registered";
 
 const router = createBrowserRouter([
   {
@@ -48,11 +49,15 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
+    element: <Dashboard></Dashboard>,
     children: [
       {
         path: "/dashboard/profile",
         element: <PrivateRoute><Profile></Profile></PrivateRoute>,
+      },
+      {
+        path: "/dashboard/manageregistered",
+        element: <Registered></Registered>,
       },
       {
         path: "/dashboard/updateprofile",

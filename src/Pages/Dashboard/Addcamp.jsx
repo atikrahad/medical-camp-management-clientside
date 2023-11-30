@@ -26,36 +26,36 @@ const Addcamp = () => {
   const [users] = useUser();
 
   const image_api =
-    "https://api.imgbb.com/1/upload?key=7fa3563ebeba8875d6f06cc577afb44e";
+    `${import.meta.env.VITE_IMGAPI}`;
 
-  const onSubmit = async (data) => {
-    console.log(data);
+  const onSubmit = async (b) => {
+    console.log(b);
     // console.log(data.campImage[0]);
-    const image = data.campImage[0];
+    const image = b.campImage[0];
     const imgdata = new FormData();
     imgdata.append("image", image);
 
-    // fetch(`${image_api}`,{
-    //   method: "POST",
-    //   body: imgdata
-    // })
-    // .then(res => res.json())
-    // .then(data => console.log(data))
-
-    const res = await axiosPublic.post(image_api, imgdata, {});
-
-    if (res.data.success) {
+    fetch(`${image_api}`,{
+      method: "POST",
+      body: imgdata
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+      console.log(b)
+      
+      if (data.success) {
       const campItem = {
-        campName: data.campName,
-        vanue: data.vanue,
-        fees: parseFloat(data.fees),
-        division: data.division,
+        campName: b.campName,
+        vanue: b.vanue,
+        fees: parseFloat(b.fees),
+        division: b.division,
         date: startDate,
-        vanueLocation: data.vanueLocation,
-        audianceType: data.audianceType,
-        healthcareWorker: data.healthcareWorker,
-        comprehensiveDescription: data.comprehensiveDescription,
-        image: res.data.data.display_url,
+        vanueLocation: b.vanueLocation,
+        audianceType: b.audianceType,
+        healthcareWorker: b.healthcareWorker,
+        comprehensiveDescription: b.comprehensiveDescription,
+        image: data.data.display_url,
         organaizerName: users.name,
         organaizerEmail: users.email,
       };
@@ -72,6 +72,38 @@ const Addcamp = () => {
         });
       });
     }
+    })
+
+    // const res = await axiosPublic.post(image_api, imgdata);
+//  console.log(res);
+    // if (res.data.success) {
+    //   const campItem = {
+    //     campName: data.campName,
+    //     vanue: data.vanue,
+    //     fees: parseFloat(data.fees),
+    //     division: data.division,
+    //     date: startDate,
+    //     vanueLocation: data.vanueLocation,
+    //     audianceType: data.audianceType,
+    //     healthcareWorker: data.healthcareWorker,
+    //     comprehensiveDescription: data.comprehensiveDescription,
+    //     image: res.data.data.display_url,
+    //     organaizerName: users.name,
+    //     organaizerEmail: users.email,
+    //   };
+    //   console.log(campItem);
+    //   axiosSecure.post("/camp", campItem).then((res) => {
+    //     console.log(res);
+    //     reset()
+    //     Swal.fire({
+    //       position: "top-end",
+    //       icon: "success",
+    //       title: "Your work has been saved",
+    //       showConfirmButton: false,
+    //       timer: 1500,
+    //     });
+    //   });
+    // }
 
     
   };

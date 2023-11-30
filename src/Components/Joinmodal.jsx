@@ -4,6 +4,9 @@ import Button from '@mui/material/Button';
 import Modal from '@mui/material/Modal';
 import { FormControl, Grid, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import useUser from '../Hooks/useUser';
+import axiosPublic from '../Api/axiospublic';
+import Swal from 'sweetalert2';
 
 const style = {
   position: 'absolute',
@@ -17,14 +20,41 @@ const style = {
   p: 4,
 };
 
-export default function Joinmodal() {
+export default function Joinmodal({data}) {
   const [open, setOpen] = React.useState(false);
+  const [users] = useUser()
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = (d) => {
+    console.log(d);
+
+    const registeredData = {
+      participentName: d.name,
+      participentNumber: d.number,
+      participentAge: d.age,
+      participentGender: d.gender,
+      participentAddress: d.address,
+      campId: data._id,
+      participentEmail: users.email,
+      premium: false,
+    }
+
+   axiosPublic.post("/participent", registeredData)
+   .then(res => {
+    if(res.data){
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Successfuly joined",
+        showConfirmButton: false,
+        timer: 1500
+      });
+      setOpen(false)
+    }
+   })
+
   };
 
   return (
@@ -118,7 +148,7 @@ export default function Joinmodal() {
           label="Address"
           multiline
           rows={2}
-          {...register("addres")}
+          {...register("address")}
         />
 
         <Button variant="contained" type="submit">

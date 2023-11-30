@@ -1,7 +1,6 @@
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, Container, Grid, TextField } from "@mui/material";
-import img from "../../assets/homepic/cdc-vt7iAyiwpf0-unsplash.jpg";
 import Joinmodal from "../../Components/Joinmodal";
 import { useForm } from "react-hook-form";
 import * as React from "react";
@@ -9,17 +8,37 @@ import Box from "@mui/material/Box";
 import Rating from "@mui/material/Rating";
 import { useLoaderData } from "react-router-dom";
 import useUser from "../../Hooks/useUser";
+import axiosSecure from "../../Api/axiosSecure";
+import Swal from "sweetalert2";
 
 export default function Details() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, reset } = useForm();
   const [value, setValue] = React.useState(2);
   const {data} = useLoaderData()
   const [users] = useUser()
 
   console.log(data)
-  const onSubmit = (data) => {
-    console.log(data);
-    console.log(value);
+  const onSubmit = (d) => {
+    const userReview = {
+      reviewersEmail: users.email,
+      reviewersPic: users?.userImage,
+      rating: value,
+      comment: d.comment,
+      campId: data._id
+    }
+    axiosSecure.post("/reviews", userReview)
+    .then(res => {
+      if(res.data){
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Thanks for review",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        reset()
+      }
+    })
   };
 
   return (
@@ -55,14 +74,14 @@ export default function Details() {
         </Grid>
 
         {
-          !(users.feild == 'organizers') && <Joinmodal></Joinmodal>
+          !(users.feild == 'organizers') && <Joinmodal data={data}></Joinmodal>
 
         }
         <Typography variant="body2" color="text.secondary">
           {data.comprehensiveDescription}
         </Typography>
         {
-          (data.date === new Date() && users.feild!== 'organizers') && <form
+          ( users.feild!== 'organizers') && <form
           className="w-full md:w-1/2"
             style={{
               display: "flex",
@@ -93,7 +112,7 @@ export default function Details() {
               label="Comment"
               multiline
               rows={4}
-              {...register("addres")}
+              {...register("comment")}
             />
   
             <Button variant="contained" type="submit">
