@@ -18,11 +18,13 @@ import PrivateRoute from "../Private/PrivateRoute";
 import Privateorganizer from "../Private/Privateorganizer";
 import axiosSecure from "../Api/axiosSecure";
 import Registered from "../Pages/Dashboard/Registered";
+import Error from "../Pages/Error";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Homelayout></Homelayout>,
+    errorElement: <Error></Error>,
     children: [
       {
         index: true,

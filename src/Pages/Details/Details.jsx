@@ -10,6 +10,8 @@ import { useLoaderData } from "react-router-dom";
 import useUser from "../../Hooks/useUser";
 import axiosSecure from "../../Api/axiosSecure";
 import Swal from "sweetalert2";
+// import { useQuery } from "@tanstack/react-query";
+// import axiosPublic from "../../Api/axiospublic";
 
 export default function Details() {
   const { register, handleSubmit, reset } = useForm();
@@ -17,6 +19,14 @@ export default function Details() {
   const {data} = useLoaderData()
   const [users] = useUser()
 
+  // const {refetch, dat}=useQuery({
+  //   queryKey:['reviews'],
+  //   queryFn: ()=>{
+  //     axiosPublic.get(`/campreview?campid=${data._id}`)
+  //     .then(res => console.log(res.data))
+  //   }
+  // })
+// console.log(dat);
   console.log(data)
   const onSubmit = (d) => {
     const userReview = {
