@@ -19,6 +19,9 @@ import Privateorganizer from "../Private/Privateorganizer";
 import axiosSecure from "../Api/axiosSecure";
 import Registered from "../Pages/Dashboard/Registered";
 import Error from "../Pages/Error";
+import Participent from "../Pages/Dashboard/Participent";
+import Privateparticipent from "../Private/Privateparticipent";
+import Updatecamp from "../Pages/Dashboard/Updatecamp";
 
 const router = createBrowserRouter([
   {
@@ -54,12 +57,12 @@ const router = createBrowserRouter([
     element: <Dashboard></Dashboard>,
     children: [
       {
-        path: "/dashboard/profile",
+        index: true,
         element: <PrivateRoute><Profile></Profile></PrivateRoute>,
       },
       {
         path: "/dashboard/manageregistered",
-        element: <Registered></Registered>,
+        element: <Privateparticipent><Registered></Registered></Privateparticipent>,
       },
       {
         path: "/dashboard/updateprofile",
@@ -74,9 +77,18 @@ const router = createBrowserRouter([
         element: <Privateorganizer><Managecamp></Managecamp></Privateorganizer>
       },
       {
-        index: true,
+        path: "/dashboard/organizer",
         element: <Privateorganizer><Organizer></Organizer></Privateorganizer>
-      }
+      },
+      {
+        path: "/dashboard/participent",
+        element: <Privateparticipent><Participent></Participent></Privateparticipent>
+      },
+      {
+        path: "/updatecamp",
+        element: <Privateorganizer><Updatecamp></Updatecamp></Privateorganizer>
+      },
+      
     ],
   },
   {

@@ -13,7 +13,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import ShareIcon from "@mui/icons-material/Share";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { NavLink } from "react-router-dom";
-import { Button } from "@mui/material";
+import { Button, Grid } from "@mui/material";
 
 export default function Availablecard({ data }) {
   return (
@@ -24,22 +24,24 @@ export default function Availablecard({ data }) {
             <MoreVertIcon />
           </IconButton>
         }
-        title={data.name}
-        subheader={data.date}
+        title={data.campName}
+        sx={{height: '100px', display: 'flex', alignItems:'baseline'}}
       />
       <img src={data.image} className="w-full h-44" alt="" />
       <CardContent>
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="h6">Services: {data.vanue}</Typography>
+        <Typography>Location: {data.vanueLocation}</Typography>
+        <Typography>Date: {data.date}</Typography>
+        <Grid sx={{display: 'flex', justifyContent:"space-between"}}>
+          <Typography>Participent Type: {data.audianceType}</Typography>
+          <Typography>Fee: {data.fees}tk</Typography>
+        </Grid>
+        <Typography sx={{height: '40px', py:'5px', textOverflow: 'ellipsis', overflow:'hidden'}} variant="body2" color="text.secondary">
           {data.comprehensiveDescription}
         </Typography>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
+        
         <NavLink to={`/campdetails/${data._id}`}>
           <Button>View Details</Button>
         </NavLink>

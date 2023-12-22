@@ -14,10 +14,22 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 
 import { Grid } from "@mui/material";
-import { AccountCircle, Bungalow, Home, LibraryAdd, ManageSearch, Settings } from "@mui/icons-material";
+import {
+  AccountCircle,
+  Beenhere,
+  Bungalow,
+  Home,
+  JoinFull,
+  LibraryAdd,
+  ManageSearch,
+  Settings,
+} from "@mui/icons-material";
 
 import Slidernav from "../Components/Slidernav";
 import { NavLink } from "react-router-dom";
+// import useUser from "../Hooks/useUser";
+// import useAuth from "../Hooks/useAuth";
+import { Authinfo } from "./Authprovider";
 
 const drawerWidth = 240;
 
@@ -89,6 +101,8 @@ const Drawer = styled(MuiDrawer, {
 export default function Sideber() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  // const [users] = useUser();
+  const {user} = React.useContext(Authinfo)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -151,29 +165,51 @@ export default function Sideber() {
         <Divider sx={{ bgcolor: "#37474f" }} />
         <List sx={{ bgcolor: "#37474f" }}>
           <Slidernav
-            name={"Dashboard"}
+            name={"Profile"}
+            icon={<AccountCircle></AccountCircle>}
             link={"/dashboard"}
-            icon={<Bungalow></Bungalow>}
           ></Slidernav>
-          <Slidernav
+
+          {user?.displayName == "organizers" && (
+            <Slidernav
+              name={"Organizer"}
+              link={"/dashboard/organizer"}
+              icon={<Bungalow></Bungalow>}
+            ></Slidernav>
+          )}
+          {user?.displayName == "organizers" && (
+            <Slidernav
             name={"Add Camp"}
             link={"/dashboard/addcamp"}
             icon={<LibraryAdd></LibraryAdd>}
           ></Slidernav>
-          <Slidernav
+          )}
+          {user?.displayName == "organizers" && (
+            <Slidernav
             name={"Manage Camp"}
             link={"/dashboard/managecamp"}
             icon={<ManageSearch></ManageSearch>}
           ></Slidernav>
+          )}
+          {user?.displayName == "participants" && (
+            <Slidernav
+            name={"Participent"}
+            link={"/dashboard/participent"}
+            icon={<JoinFull></JoinFull>}
+          ></Slidernav>
+          )}
+          {user?.displayName == "participants" && (
+            <Slidernav
+            name={"My Registered"}
+            link={"/dashboard/manageregistered"}
+            icon={<Beenhere></Beenhere>}
+          ></Slidernav>
+          )}
           
+            
         </List>
         <Divider sx={{ bgcolor: "#78909c" }} />
         <List sx={{ bgcolor: "#37474f", height: "100%" }}>
-          <Slidernav
-            name={"Profile"}
-            icon={<AccountCircle></AccountCircle>}
-            link={"/dashboard/profile"}
-          ></Slidernav>
           <Slidernav
             name={"Setting"}
             icon={<Settings></Settings>}

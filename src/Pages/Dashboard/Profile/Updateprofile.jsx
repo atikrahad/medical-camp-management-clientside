@@ -10,13 +10,70 @@ import {
 
 import { useForm } from "react-hook-form";
 
-
 import "react-datepicker/dist/react-datepicker.css";
+// import axiosSecure from "../../../Api/axiosSecure";
+import useUser from "../../../Hooks/useUser";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const Updateprofile = () => {
   const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
+  const [users] = useUser();
+
+  const image_api = `${import.meta.env.VITE_IMGAPI}`;
+const navigate = useNavigate()
+  const onSubmit = (b) => {
+    console.log(b);
+
+    const image = b.pic[0];
+    const imgdata = new FormData();
+    imgdata.append("image", image);
+
+    fetch(`${image_api}`, {
+      method: "POST",
+      body: imgdata,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log();
+
+        const updateProfile = {
+          ProfilePic: data.data.display_url,
+          name: b.name,
+          number: b.number,
+          localAddress: b.localAddress,
+          country: b.country,
+          state: b.state,
+          city: b.city,
+        };
+        console.log(updateProfile);
+        if (data.success) {
+          // axiosSecure.put(`/user/${users._id}`, updateProfile).then((res) => {
+          //   console.log(res.data);
+          // });
+
+          fetch(`${import.meta.env.VITE_API}/user/${users._id}`, {
+            method: "PUT",
+            headers:{
+              'content-type': 'application/json'
+            },
+            body: JSON.stringify(updateProfile)
+          })
+          .then(res => res.json())
+          .then(data => {
+            console.log(data);
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Profile update successfully",
+              showConfirmButton: false,
+              timer: 1500
+            });
+            navigate('/dashboard')
+          })
+        }
+      });
   };
   return (
     <div className="bg-[#37474f] p-5 rounded-md">
@@ -39,29 +96,29 @@ const Updateprofile = () => {
             type="text"
             label="Your Name"
             sx={{}}
+            defaultValue={users.name}
             fullWidth
+            required
             variant="outlined"
           />
-          <TextField
-            id="outlined-basic"
-            {...register("email")}
-            type="text"
-            label="Your Email"
-            sx={{}}
-            fullWidth
-            variant="outlined"
-          />
+
           <TextField
             id="outlined-basic"
             {...register("number")}
-            type="text"
+            type="number"
             label="Phone Number"
             sx={{}}
+            required
             fullWidth
             variant="outlined"
           />
 
-          
+          <input
+            type="file"
+            {...register("pic")}
+            required
+            className="text-white w-full md:ml-4 my-5"
+          />
         </Grid>
         <Grid
           sx={{
@@ -75,10 +132,11 @@ const Updateprofile = () => {
           <TextField
             id="outlined-basic"
             {...register("country")}
-            type="number"
+            type="text"
             label="Country"
             fullWidth
             sx={{}}
+            required
             variant="outlined"
           />
 
@@ -89,6 +147,7 @@ const Updateprofile = () => {
               id="demo-simple-select"
               {...register("state")}
               //   value={age}
+              required
               label="Division"
               //   onChange={handleChange}
             >
@@ -110,6 +169,7 @@ const Updateprofile = () => {
             type="text"
             fullWidth
             label="City"
+            required
             sx={{}}
             variant="outlined"
           />
@@ -164,18 +224,14 @@ const Updateprofile = () => {
           />
         </Grid> */}
 
-        <Grid sx={{display:'flex'}}>
+        <Grid sx={{ display: "flex" }}>
           <TextField
             id="outlined-multiline-static"
             label="Local Address"
             multiline
+            required
             rows={2}
             {...register("localAddress")}
-          />
-          <input
-            type="file"
-            {...register("pic")}
-            className="text-white w-full md:ml-4 my-5"
           />
         </Grid>
 

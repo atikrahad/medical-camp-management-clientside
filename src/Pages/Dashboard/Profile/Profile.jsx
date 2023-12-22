@@ -20,11 +20,11 @@ const Profile = () => {
         }}
       >
         <Grid sx={{ display: "flex", gap: "10px", alignItems: "center" }}>
-          {/* <img
-            src={users.pic}
+          <img
+            src={users.profilePic}
             className="md:w-20 w-10 h-10 md:h-20 rounded-full"
             alt=""
-          /> */}
+          />
 
           <Typography
             sx={{ fontWeight: "700", fontSize: "1.5rem", color: "white" }}
@@ -160,7 +160,7 @@ const Profile = () => {
             Local address:
           </Typography>
           <Typography>
-            {users.localaddress ? users.localaddress : "N/A"}
+            {users.localAddress ? users.localAddress : "N/A"}
           </Typography>
         </Grid>
       </Grid>

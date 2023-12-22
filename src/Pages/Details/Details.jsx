@@ -55,6 +55,9 @@ export default function Details() {
     <Container maxWidth={"md"} sx={{ py: { xs: "100px", md: "120px" } }}>
       <img src={data.image} className="w-full rounded-md" alt="" />
       <CardContent>
+            <Typography gutterBottom variant="h5" component="div">
+              {data.campName}
+            </Typography>
         <Grid
           sx={{
             display: "flex",
@@ -62,10 +65,10 @@ export default function Details() {
             justifyContent: "space-between",
           }}
         >
-          <Typography gutterBottom variant="h5" component="div">
-            {data.campName}
-          </Typography>
-          <Typography>{data.date}</Typography>
+            <Typography gutterBottom variant="h5" component="div">
+              Services: {data.vanue}
+            </Typography>
+          <Typography>Date: {data.date}</Typography>
         </Grid>
         <Grid
           sx={{
@@ -73,21 +76,19 @@ export default function Details() {
             flexWrap: "wrap",
             gap: "20px",
             alignItems: "center",
+            justifyContent:'space-between'
           }}
         >
-          <Typography gutterBottom variant="h5" component="div">
-            {data.vanue}
-          </Typography>
-          <Typography>{data.audianceType}</Typography>
-          <Typography>{data.vanueLocation}</Typography>
-          <Typography>{data.fees}</Typography>
+          <Typography>Participent Type: {data.audianceType}</Typography>
+          <Typography>Location: {data.vanueLocation}</Typography>
+          <Typography>Fee: {data.fees}</Typography>
         </Grid>
 
         {
           !(users.feild == 'organizers') && <Joinmodal data={data}></Joinmodal>
 
         }
-        <Typography variant="body2" color="text.secondary">
+        <Typography variant="body2" sx={{py:'10px'}} color="text.secondary">
           {data.comprehensiveDescription}
         </Typography>
         {

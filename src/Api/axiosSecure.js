@@ -10,12 +10,12 @@ const axiosSecure = axios.create({
 })
 
 
-axiosSecure.interceptors.response.use(res => {
-    return res;
-}, async error=>{
-    console.log(error.response.status);
-    if(error.response.status === 401 || error.response.status ===403){
-        return signOut(auth)
-    }
-})
+// axiosSecure.interceptors.response.use(res => {
+//     return res;
+// }, async error=>{
+//     console.log(error.response.status);
+//     if(error.response.status === 401 || error.response.status ===403){
+//         return signOut(auth)
+//     }
+// })
 export default axiosSecure;

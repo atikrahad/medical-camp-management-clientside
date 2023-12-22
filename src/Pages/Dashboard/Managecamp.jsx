@@ -1,47 +1,116 @@
-import { Delete, Edit } from "@mui/icons-material";
+import { Delete, Edit, Update } from "@mui/icons-material";
 import { Button } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import DataTable from "react-data-table-component";
+import axiosSecure from "../../Api/axiosSecure";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import { NavLink } from "react-router-dom";
 
 const Managecamp = () => {
-  const [loadfeautured, setLoadfeautured] = useState([]);
+  // const [loadfeautured, setLoadfeautured] = useState([]);
+  const {user} = useAuth()
 
-  useEffect(() => {
-    axios
-      .get("https://blogsite-server.vercel.app/feautured")
+  // useEffect(() => {
+  //   axiosSecure
+  //     .get(`/usercamp?email=${user?.email}`)
 
-      .then((data) => setLoadfeautured(data.data));
-  }, []);
+  //     .then((data) => setLoadfeautured(data.data));
+  // }, [user]);
+
+
+  const {refetch, data: camps =[]} = useQuery({
+    queryKey: ['usercamp'],
+    queryFn: async ()=>{
+      const res = await axiosSecure.get(`/usercamp?email=${user.email}`)
+      return res.data
+    }
+  })
 
   let num = 1;
-  loadfeautured.map((data) => (data.serial = num++));
+  camps.map((data) => (data.serial = num++));
 
-  console.log(loadfeautured);
+  // console.log(loadfeautured);
 
+  const handleUpdate = id => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        axiosSecure.delete(`/deletecamp/${id}`)
+        .then(res => {
+          console.log(res.data);
+          refetch()
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        })
+        console.log(id);
+      }
+    });
+  }
   
   const handleDelete = id => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
 
+        axiosSecure.delete(`/deletecamp/${id}`)
+        .then(res => {
+          console.log(res.data);
+          refetch()
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your file has been deleted.",
+            icon: "success"
+          });
+        })
+        console.log(id);
+      }
+    });
   }
 
   const columns = [
     {
       name: "Camp Title",
-      selector: (row) => row.title,
+      selector: (row) => row.campName,
       sortable: true,
     },
 
     {
       name: "Camp Image",
       selector: (row) => (
-        <img className="w-16 rounded-full" src={row.pic}></img>
+        <img className="w-16 h-16 rounded-full" src={row.image}></img>
       ),
     },
     {
       name: "Organizer Name",
-      selector: (row) => row.name,
+      selector: (row) => row.organaizerName,
     },
     
+    {
+      name: "Delete",
+      selector: (row) => <Button variant="contained"><NavLink to="/updatecamp"><Edit></Edit></NavLink></Button>,
+      
+    },
     {
       name: "Delete",
       selector: (row) => <Button variant="contained" onClick={()=>handleDelete(row._id)}><Delete></Delete></Button>,
@@ -61,7 +130,7 @@ const Managecamp = () => {
         responsive
         fixedHeader
         fixedHeaderScrollHeight="400px"
-        data={loadfeautured}
+        data={camps}
       ></DataTable>
     </div>
   );

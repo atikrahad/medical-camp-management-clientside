@@ -19,39 +19,83 @@ import { Authinfo } from "../Shared/Authprovider";
 import axiosPublic from "../Api/axiospublic";
 import Swal from "sweetalert2";
 import useUser from "../Hooks/useUser";
+import { updateProfile } from "firebase/auth";
+import { auth } from "../Firebase/firebase";
 
 export default function Register() {
   const [age, setAge] = useState("");
   const { createAccountwithEmail } = useContext(Authinfo);
-  const [,refetch] = useUser()
+  const [, refetch] = useUser();
 
   const { register, handleSubmit } = useForm();
   const [showPassword, setShowPassword] = useState(false);
-  const navigate = useNavigate()
-  const onSubmit = (data) => {
-    
-      createAccountwithEmail(data.email, data.password)
-        .then((user) => {
-          console.log(user);
-          axiosPublic.post('/user', data)
-          .then(data => {
-            if(data.data){
-              Swal.fire({
-                position: "top-end",
-                icon: "success",
-                title: "Successfully reigistered",
-                showConfirmButton: false,
-                timer: 1500
-              });
-            }
-            refetch()
+  const navigate = useNavigate();
 
+  const image_api = `${import.meta.env.VITE_IMGAPI}`;
+
+  const onSubmit = (b) => {
+    const image = b.image[0];
+    const imgdata = new FormData();
+    imgdata.append("image", image);
+
+    fetch(`${image_api}`, {
+      method: "POST",
+      body: imgdata,
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        console.log(b);
+
+        const userData = {
+          name: b.name,
+          email: b.email,
+          password: b.password,
+          feild: b.feild,
+          profilePic: data.data.display_url,
+          number: 'N/A',
+          localAddress: 'N/A',
+          country: 'N/A',
+          state: 'N/A',
+          city: 'N/A'
+        };
+        
+        if(data.success){
+          createAccountwithEmail(b.email, b.password)
+          .then((user) => {
+            console.log(user);
+            updateProfile(auth.currentUser,{
+              displayName:b.feild,
+              photoURL: data.data.display_url,
+              
+            })
+            .then(()=>{
+
+              axiosPublic.post('/user', userData)
+              .then(data => {
+
+                if(data.data){
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Successfully reigistered",
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+                }
+                refetch()
+                navigate('/')
+              })
+            })
+            .catch(error => {
+              console.log(error.message);
+            })
           })
-          navigate('/')
-        })
-        .then((error) => {
-          console.log(error);
-        });
+          .then((error) => {
+            console.log(error.message);
+          });
+        }
+      });
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -119,6 +163,8 @@ export default function Register() {
             label="Password"
           />
         </FormControl>
+
+        <input type="file" {...register("image")} />
         <FormControl fullWidth>
           <InputLabel id="demo-simple-select-label">Feild</InputLabel>
           <Select

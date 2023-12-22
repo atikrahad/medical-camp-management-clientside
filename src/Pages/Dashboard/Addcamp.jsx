@@ -126,6 +126,7 @@ const Addcamp = () => {
             id="outlined-basic"
             {...register("campName")}
             type="text"
+            inputProps={{maxLength: 25}}
             label="Camp name"
             sx={{}}
             fullWidth
@@ -179,10 +180,9 @@ const Addcamp = () => {
               <MenuItem value={"rajshahi"}>Rajshahi</MenuItem>
               <MenuItem value={"rangpur"}>Rangpur</MenuItem>
               <MenuItem value={"kumilla"}>Kumilla</MenuItem>
-              <MenuItem value={"sylet"}>Sylet</MenuItem>
+              <MenuItem value={"sylhet"}>Sylhet</MenuItem>
               <MenuItem value={"chottogram"}>Chottogram</MenuItem>
               <MenuItem value={"khulna"}>Khulna</MenuItem>
-              <MenuItem value={"borisal"}>Borisal</MenuItem>
               <MenuItem value={"moymonshing"}>Moymonshing</MenuItem>
             </Select>
           </FormControl>
@@ -194,6 +194,7 @@ const Addcamp = () => {
             fullWidth
             label="Vanue location"
             sx={{}}
+            inputProps={{maxLength: 20}}
             variant="outlined"
           />
         </Grid>
@@ -213,6 +214,7 @@ const Addcamp = () => {
             label="Type of vanue"
             fullWidth
             sx={{}}
+            inputProps={{maxLength: 25}}
             variant="outlined"
           />
 

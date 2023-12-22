@@ -64,12 +64,12 @@ console.log(loadall);
         >
           <option value="all">All</option>
           <option value="dhaka">Dhaka</option>
-          <option value="rajsahi">Rajsahi</option>
+          <option value="rajshahi">Rajsahi</option>
           <option value="khulna">Khulna</option>
           <option value="chottogram">Chottogram</option>
           <option value="rangpur">Rangpur</option>
           <option value="sylhet">Sylhet</option>
-          <option value="cumilla">Cumilla</option>
+          <option value="kumilla">Cumilla</option>
           <option value="moymonshing">Moymonshing</option>
         </select>
       </div>
